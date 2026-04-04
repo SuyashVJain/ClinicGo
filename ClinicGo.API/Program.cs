@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using ClinicGo.API.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -103,7 +104,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 // ChatHub wired here — we'll create the class in a later step
-// app.MapHub<ChatHub>("/chathub");
+app.MapHub<ChatHub>("/chathub");
 
 // Seed database on startup
 using (var scope = app.Services.CreateScope())
