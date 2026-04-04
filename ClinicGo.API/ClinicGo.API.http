@@ -1,0 +1,6 @@
+@ClinicGo.API_HostAddress = http://localhost:5170
+
+GET {{ClinicGo.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
