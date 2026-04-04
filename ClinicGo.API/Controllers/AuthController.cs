@@ -20,7 +20,7 @@ public class AuthController : ControllerBase
         _tokenService = tokenService;
     }
 
-    // POST /api/v1/auth/register  — patients only, self-registration
+    // POST /api/v1/auth/register  - patients only, self-registration
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest req)
     {
@@ -43,7 +43,7 @@ public class AuthController : ControllerBase
         return Ok(new { message = "Registration successful. Awaiting approval.", userId = user.UserId });
     }
 
-    // POST /api/v1/auth/login  — all roles
+    // POST /api/v1/auth/login  - all roles
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest req)
     {
@@ -67,7 +67,7 @@ public class AuthController : ControllerBase
         });
     }
 
-    // GET /api/v1/auth/me  — returns current user from token
+    // GET /api/v1/auth/me  - returns current user from token
     [HttpGet("me")]
     [Microsoft.AspNetCore.Authorization.Authorize]
     public async Task<IActionResult> Me()

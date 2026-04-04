@@ -61,16 +61,16 @@ export default function AdminAnalytics() {
           <div className="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10">
             <p className="text-sm text-outline mb-2">Revenue Today</p>
             <p className="text-3xl font-bold text-on-background">
-              {revenue ? `₹${revenue.revenue?.toLocaleString('en-IN')}` : '—'}
+              {revenue ? `₹${revenue.revenue?.toLocaleString('en-IN')}` : '-'}
             </p>
           </div>
           <div className="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10">
             <p className="text-sm text-outline mb-2">Total Appointments</p>
-            <p className="text-3xl font-bold text-on-background">{cancel?.total ?? '—'}</p>
+            <p className="text-3xl font-bold text-on-background">{cancel?.total ?? '-'}</p>
           </div>
           <div className="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10">
             <p className="text-sm text-outline mb-2">Cancellation Rate</p>
-            <p className="text-3xl font-bold text-on-background">{cancel ? `${cancel.rate}%` : '—'}</p>
+            <p className="text-3xl font-bold text-on-background">{cancel ? `${cancel.rate}%` : '-'}</p>
           </div>
         </div>
 
@@ -90,7 +90,7 @@ export default function AdminAnalytics() {
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="h-56 flex items-center justify-center text-outline text-sm">No data — click Recompute</div>
+              <div className="h-56 flex items-center justify-center text-outline text-sm">No data - click Recompute</div>
             )}
           </div>
 
@@ -117,7 +117,7 @@ export default function AdminAnalytics() {
                 </div>
               </div>
             ) : (
-              <div className="h-44 flex items-center justify-center text-outline text-sm">No data — click Recompute</div>
+              <div className="h-44 flex items-center justify-center text-outline text-sm">No data - click Recompute</div>
             )}
           </div>
         </div>

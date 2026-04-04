@@ -43,7 +43,7 @@ public class AdminController : ControllerBase
         return Ok(doctors);
     }
 
-    // POST /api/v1/admin/doctors — create doctor account
+    // POST /api/v1/admin/doctors - create doctor account
     [HttpPost("doctors")]
     public async Task<IActionResult> CreateDoctor(CreateDoctorRequest req)
     {
@@ -92,7 +92,7 @@ public class AdminController : ControllerBase
         return Ok(new { message = "Doctor updated.", doctorId = id });
     }
 
-    // DELETE /api/v1/admin/doctors/{id} — deactivate (not hard delete)
+    // DELETE /api/v1/admin/doctors/{id} - deactivate (not hard delete)
     [HttpDelete("doctors/{id}")]
     public async Task<IActionResult> DeactivateDoctor(int id)
     {
@@ -116,7 +116,7 @@ public class AdminController : ControllerBase
         return Ok(staff);
     }
 
-    // POST /api/v1/admin/staff — create receptionist account
+    // POST /api/v1/admin/staff - create receptionist account
     [HttpPost("staff")]
     public async Task<IActionResult> CreateStaff(CreateStaffRequest req)
     {
@@ -159,7 +159,7 @@ public class AdminController : ControllerBase
         return Ok(latest);
     }
 
-    // POST /api/v1/admin/analytics/compute — trigger analytics recomputation
+    // POST /api/v1/admin/analytics/compute - trigger analytics recomputation
     [HttpPost("analytics/compute")]
     public async Task<IActionResult> Compute()
     {

@@ -20,7 +20,7 @@ public class PaymentController : ControllerBase
         _db = db;
     }
 
-    // POST /api/v1/payments/initiate — patient initiates online payment
+    // POST /api/v1/payments/initiate - patient initiates online payment
     [HttpPost("initiate")]
     [Authorize(Roles = "PATIENT")]
     public async Task<IActionResult> Initiate(InitiatePaymentRequest req)
@@ -41,13 +41,13 @@ public class PaymentController : ControllerBase
             ? appointment.Doctor.NewPatientFee
             : appointment.Doctor.FollowUpFee;
 
-        // Simulate payment — in production this calls UPI gateway
+        // Simulate payment - in production this calls UPI gateway
         var payment = new Payment
         {
             AppointmentId  = req.AppointmentId,
             Amount         = fee,
             Method         = req.Method,
-            Status         = "PAID",  // simulated — assume instant success
+            Status         = "PAID",  // simulated - assume instant success
             TransactionRef = $"TXN{DateTime.UtcNow.Ticks}",
             PaidAt         = DateTime.UtcNow
         };
@@ -58,7 +58,7 @@ public class PaymentController : ControllerBase
         return Ok(MapResponse(payment));
     }
 
-    // POST /api/v1/payments/record-cash — receptionist records walk-in cash payment
+    // POST /api/v1/payments/record-cash - receptionist records walk-in cash payment
     [HttpPost("record-cash")]
     [Authorize(Roles = "RECEPTIONIST")]
     public async Task<IActionResult> RecordCash(RecordCashPaymentRequest req)
@@ -88,7 +88,7 @@ public class PaymentController : ControllerBase
         return Ok(MapResponse(payment));
     }
 
-    // GET /api/v1/payments/{appointmentId} — get payment for appointment
+    // GET /api/v1/payments/{appointmentId} - get payment for appointment
     [HttpGet("{appointmentId}")]
     public async Task<IActionResult> GetByAppointment(int appointmentId)
     {
@@ -114,7 +114,7 @@ public class PaymentController : ControllerBase
         return Ok(payments.Select(MapResponse));
     }
 
-    // POST /api/v1/payments/{paymentId}/refund — process refund
+    // POST /api/v1/payments/{paymentId}/refund - process refund
     [HttpPost("{paymentId}/refund")]
     [Authorize(Roles = "ADMIN,RECEPTIONIST")]
     public async Task<IActionResult> Refund(int paymentId)
@@ -141,7 +141,7 @@ public class PaymentController : ControllerBase
         {
             payment.Status = "FORFEITED";
             await _db.SaveChangesAsync();
-            return BadRequest(new { message = "Cancellation within 24 hours — no refund applicable." });
+            return BadRequest(new { message = "Cancellation within 24 hours - no refund applicable." });
         }
 
         payment.Status     = "REFUNDED";

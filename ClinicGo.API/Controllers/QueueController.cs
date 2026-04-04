@@ -17,7 +17,7 @@ public class QueueController : ControllerBase
         _db = db;
     }
 
-    // GET /api/v1/queue/today/{doctorId} — full queue for a doctor today
+    // GET /api/v1/queue/today/{doctorId} - full queue for a doctor today
     [HttpGet("today/{doctorId}")]
     [Authorize(Roles = "DOCTOR,RECEPTIONIST")]
     public async Task<IActionResult> GetTodayQueue(int doctorId)
@@ -62,7 +62,7 @@ public class QueueController : ControllerBase
         return Ok(summary);
     }
 
-    // PUT /api/v1/queue/{appointmentId}/next — advance queue (mark current as complete)
+    // PUT /api/v1/queue/{appointmentId}/next - advance queue (mark current as complete)
     [HttpPut("{appointmentId}/next")]
     [Authorize(Roles = "RECEPTIONIST")]
     public async Task<IActionResult> CallNext(int appointmentId)
@@ -98,7 +98,7 @@ public class QueueController : ControllerBase
         });
     }
 
-    // PUT /api/v1/queue/{appointmentId}/skip — mark as no-show
+    // PUT /api/v1/queue/{appointmentId}/skip - mark as no-show
     [HttpPut("{appointmentId}/skip")]
     [Authorize(Roles = "RECEPTIONIST")]
     public async Task<IActionResult> Skip(int appointmentId)

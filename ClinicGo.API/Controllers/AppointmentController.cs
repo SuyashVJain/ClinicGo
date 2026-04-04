@@ -34,7 +34,7 @@ public class AppointmentController : ControllerBase
         return Ok(slots);
     }
 
-    // POST /api/v1/appointments — patient self-book or receptionist walk-in
+    // POST /api/v1/appointments - patient self-book or receptionist walk-in
     [HttpPost]
     public async Task<IActionResult> Book(BookAppointmentRequest req)
     {
@@ -128,7 +128,7 @@ public class AppointmentController : ControllerBase
         return Ok(list);
     }
 
-    // PUT /api/v1/appointments/{id}/confirm — receptionist only
+    // PUT /api/v1/appointments/{id}/confirm - receptionist only
     [HttpPut("{id}/confirm")]
     [Authorize(Roles = "RECEPTIONIST")]
     public async Task<IActionResult> Confirm(int id)
@@ -143,7 +143,7 @@ public class AppointmentController : ControllerBase
         return Ok(new { message = "Appointment confirmed.", appointmentId = id });
     }
 
-    // PUT /api/v1/appointments/{id}/cancel — patient or receptionist
+    // PUT /api/v1/appointments/{id}/cancel - patient or receptionist
     [HttpPut("{id}/cancel")]
     public async Task<IActionResult> Cancel(int id)
     {
@@ -157,7 +157,7 @@ public class AppointmentController : ControllerBase
         return Ok(new { message = "Appointment cancelled.", appointmentId = id });
     }
 
-    // PUT /api/v1/appointments/{id}/complete — doctor only
+    // PUT /api/v1/appointments/{id}/complete - doctor only
     [HttpPut("{id}/complete")]
     [Authorize(Roles = "DOCTOR")]
     public async Task<IActionResult> Complete(int id)

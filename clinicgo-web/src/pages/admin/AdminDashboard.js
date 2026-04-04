@@ -85,24 +85,24 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <KpiCard
             title="Revenue Today"
-            value={revenue ? `₹${revenue.revenue?.toLocaleString('en-IN') || 0}` : '—'}
+            value={revenue ? `₹${revenue.revenue?.toLocaleString('en-IN') || 0}` : '-'}
             sub="Online + cash payments"
             badge="Today"
           />
           <KpiCard
             title="Appointments Today"
-            value={cancelRate?.total ?? '—'}
+            value={cancelRate?.total ?? '-'}
             sub={cancelRate ? `${cancelRate.cancelled} cancelled` : ''}
             badge={cancelRate ? `${cancelRate.rate}% cancel rate` : ''}
           />
           <KpiCard
             title="Cancellation Rate"
-            value={cancelRate ? `${cancelRate.rate}%` : '—'}
+            value={cancelRate ? `${cancelRate.rate}%` : '-'}
             sub={cancelRate ? `${cancelRate.cancelled} of ${cancelRate.total}` : ''}
           />
           <KpiCard
             title="Active Doctors"
-            value={docPerf.length || '—'}
+            value={docPerf.length || '-'}
             sub="On duty today"
             live
           />
@@ -157,7 +157,7 @@ export default function AdminDashboard() {
               </div>
             ) : (
               <div className="h-52 flex items-center justify-center text-outline text-sm">
-                No data yet — click Refresh Analytics
+                No data yet - click Refresh Analytics
               </div>
             )}
           </div>

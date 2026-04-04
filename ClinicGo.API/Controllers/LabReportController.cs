@@ -21,7 +21,7 @@ public class LabReportController : ControllerBase
         _env = env;
     }
 
-    // POST /api/v1/reports/upload — patient uploads lab report
+    // POST /api/v1/reports/upload - patient uploads lab report
     [HttpPost("upload")]
     [Authorize(Roles = "PATIENT")]
     public async Task<IActionResult> Upload(IFormFile file)
@@ -71,7 +71,7 @@ public class LabReportController : ControllerBase
         });
     }
 
-    // GET /api/v1/reports/patient/{patientId} — list all reports for a patient
+    // GET /api/v1/reports/patient/{patientId} - list all reports for a patient
     [HttpGet("patient/{patientId}")]
     public async Task<IActionResult> GetByPatient(int patientId)
     {
@@ -90,7 +90,7 @@ public class LabReportController : ControllerBase
         return Ok(reports);
     }
 
-    // GET /api/v1/reports/{reportId}/download — download a specific report
+    // GET /api/v1/reports/{reportId}/download - download a specific report
     [HttpGet("{reportId}/download")]
     public async Task<IActionResult> Download(int reportId)
     {

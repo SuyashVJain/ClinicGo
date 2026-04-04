@@ -103,7 +103,7 @@ app.UseCors("ClinicGoPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-// ChatHub wired here — we'll create the class in a later step
+// ChatHub wired here - we'll create the class in a later step
 app.MapHub<ChatHub>("/chathub");
 
 // Seed database on startup

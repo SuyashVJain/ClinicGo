@@ -101,7 +101,7 @@ export default function AdminDoctors() {
           {loading ? (
             <div className="p-12 text-center text-outline text-sm">Loading doctors...</div>
           ) : doctors.length === 0 ? (
-            <div className="p-12 text-center text-outline text-sm">No doctors yet — add one above</div>
+            <div className="p-12 text-center text-outline text-sm">No doctors yet - add one above</div>
           ) : (
             <table className="w-full">
               <thead>

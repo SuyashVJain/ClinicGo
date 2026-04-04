@@ -46,14 +46,14 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
 
 
-        // Prescription → Appointment (NO CASCADE — fixes the cycle)
+        // Prescription → Appointment (NO CASCADE - fixes the cycle)
         modelBuilder.Entity<Prescription>()
             .HasOne(p => p.Appointment)
             .WithOne(a => a.Prescription)
             .HasForeignKey<Prescription>(p => p.AppointmentId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Prescription → Doctor (NO CASCADE — fixes the cycle)
+        // Prescription → Doctor (NO CASCADE - fixes the cycle)
         modelBuilder.Entity<Prescription>()
             .HasOne(p => p.Doctor)
             .WithMany(d => d.Prescriptions)
@@ -61,7 +61,7 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
 
 
-        // ChatMessage — two FKs into Users, must be explicit
+        // ChatMessage - two FKs into Users, must be explicit
         modelBuilder.Entity<ChatMessage>()
             .HasOne(m => m.Sender)
             .WithMany(u => u.SentMessages)

@@ -23,7 +23,7 @@ export default function DoctorSchedule() {
     const stored = localStorage.getItem('clinicgo_user');
     if (stored) {
       const u = JSON.parse(stored);
-      // DoctorId is fetched via appointments — we'll derive it
+      // DoctorId is fetched via appointments - we'll derive it
     }
     load();
   }, []);
@@ -32,7 +32,7 @@ export default function DoctorSchedule() {
     setLoading(true);
     try {
       // We don't have doctorId directly, so we fetch today's appointments for all doctors
-      // In a real app, /auth/me would return doctorId — for now we use userId to find it
+      // In a real app, /auth/me would return doctorId - for now we use userId to find it
       // Try doctorId = 1 as seeded
       const res = await appointmentAPI.getTodayByDoctor(1);
       setAppts(res.data || []);
@@ -69,7 +69,7 @@ export default function DoctorSchedule() {
       </header>
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Left — appointment list */}
+        {/* Left - appointment list */}
         <div className="flex-1 overflow-y-auto no-scrollbar p-6">
           {loading ? (
             <div className="text-center text-outline text-sm py-20">Loading schedule...</div>
@@ -108,7 +108,7 @@ export default function DoctorSchedule() {
           )}
         </div>
 
-        {/* Right — patient detail panel */}
+        {/* Right - patient detail panel */}
         {selected && (
           <div className="w-80 bg-surface-container-lowest border-l border-outline-variant/10 overflow-y-auto no-scrollbar p-6 space-y-5">
             {/* Patient header */}

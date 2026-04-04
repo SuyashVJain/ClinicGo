@@ -20,7 +20,7 @@ public class PrescriptionController : ControllerBase
         _db = db;
     }
 
-    // POST /api/v1/prescriptions — doctor writes prescription
+    // POST /api/v1/prescriptions - doctor writes prescription
     [HttpPost]
     [Authorize(Roles = "DOCTOR")]
     public async Task<IActionResult> Create(CreatePrescriptionRequest req)
@@ -68,7 +68,7 @@ public class PrescriptionController : ControllerBase
             await MapToResponse(prescription.PrescriptionId));
     }
 
-    // GET /api/v1/prescriptions/{appointmentId} — get prescription for appointment
+    // GET /api/v1/prescriptions/{appointmentId} - get prescription for appointment
     [HttpGet("{appointmentId}")]
     public async Task<IActionResult> GetByAppointment(int appointmentId)
     {
@@ -83,7 +83,7 @@ public class PrescriptionController : ControllerBase
         return Ok(MapResponse(prescription));
     }
 
-    // GET /api/v1/prescriptions/patient/{patientId} — all prescriptions for a patient
+    // GET /api/v1/prescriptions/patient/{patientId} - all prescriptions for a patient
     [HttpGet("patient/{patientId}")]
     public async Task<IActionResult> GetByPatient(int patientId)
     {

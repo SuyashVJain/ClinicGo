@@ -18,7 +18,7 @@ public class PatientController : ControllerBase
         _db = db;
     }
 
-    // GET /api/v1/patients/pending — receptionist sees all pending registrations
+    // GET /api/v1/patients/pending - receptionist sees all pending registrations
     [HttpGet("pending")]
     [Authorize(Roles = "RECEPTIONIST,ADMIN")]
     public async Task<IActionResult> GetPending()
@@ -39,7 +39,7 @@ public class PatientController : ControllerBase
         return Ok(pending);
     }
 
-    // PUT /api/v1/patients/{id}/approve — receptionist approves patient
+    // PUT /api/v1/patients/{id}/approve - receptionist approves patient
     [HttpPut("{id}/approve")]
     [Authorize(Roles = "RECEPTIONIST,ADMIN")]
     public async Task<IActionResult> Approve(int id)
@@ -57,7 +57,7 @@ public class PatientController : ControllerBase
         return Ok(new { message = $"{user.Name} has been approved.", userId = id });
     }
 
-    // PUT /api/v1/patients/{id}/reject — receptionist rejects patient
+    // PUT /api/v1/patients/{id}/reject - receptionist rejects patient
     [HttpPut("{id}/reject")]
     [Authorize(Roles = "RECEPTIONIST,ADMIN")]
     public async Task<IActionResult> Reject(int id)
@@ -72,7 +72,7 @@ public class PatientController : ControllerBase
         return Ok(new { message = $"{user.Name} has been rejected.", userId = id });
     }
 
-    // GET /api/v1/patients/{id}/history — full appointment + prescription history
+    // GET /api/v1/patients/{id}/history - full appointment + prescription history
     [HttpGet("{id}/history")]
     [Authorize(Roles = "DOCTOR,RECEPTIONIST,ADMIN")]
     public async Task<IActionResult> GetHistory(int id)
@@ -126,7 +126,7 @@ public class PatientController : ControllerBase
         });
     }
 
-    // GET /api/v1/patients — search patients (receptionist/doctor)
+    // GET /api/v1/patients - search patients (receptionist/doctor)
     [HttpGet]
     [Authorize(Roles = "DOCTOR,RECEPTIONIST,ADMIN")]
     public async Task<IActionResult> Search([FromQuery] string? name)
