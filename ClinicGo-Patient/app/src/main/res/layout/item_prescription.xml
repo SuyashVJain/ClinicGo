@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card"
+    android:padding="16dp"
+    android:layout_marginBottom="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_doctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dr. Anil Mehta"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#1A1C1C" />
+
+            <TextView
+                android:id="@+id/tv_diagnosis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Viral fever"
+                android:textSize="13sp"
+                android:textColor="#414752"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/tv_medicines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 medicines"
+                android:textSize="12sp"
+                android:textColor="#005DAC"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15 Jun"
+            android:textSize="12sp"
+            android:textColor="#717783" />
+    </LinearLayout>
+</LinearLayout>

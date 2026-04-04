@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#005DAC</color>
+    <color name="primary_container">#1976D2</color>
+    <color name="secondary_container">#BEE1FE</color>
+    <color name="surface">#F9F9F9</color>
+    <color name="on_surface">#1A1C1C</color>
+    <color name="outline">#717783</color>
+    <color name="error">#BA1A1A</color>
+
+    <color name="status_confirmed">#1976D2</color>
+    <color name="status_completed">#2E7D32</color>
+    <color name="status_cancelled">#BA1A1A</color>
+    <color name="status_pending">#E65100</color>
+
+    <color name="nav_active">#005DAC</color>
+    <color name="nav_inactive">#717783</color>
+</resources>
