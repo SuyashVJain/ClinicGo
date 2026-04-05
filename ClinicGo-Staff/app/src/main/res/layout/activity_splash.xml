@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:gravity="center" android:background="#F3F3F4">
+    <TextView android:layout_width="56dp" android:layout_height="56dp"
+        android:background="@drawable/bg_primary_rounded" android:gravity="center"
+        android:text="+" android:textColor="#FFFFFF" android:textSize="28sp"
+        android:textStyle="bold" android:layout_marginBottom="16dp" />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="ClinicGo Staff" android:textSize="28sp" android:textStyle="bold"
+        android:textColor="#005DAC" />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Doctor &amp; Receptionist Portal" android:textSize="13sp"
+        android:textColor="#717783" android:layout_marginTop="4dp" />
+</LinearLayout>

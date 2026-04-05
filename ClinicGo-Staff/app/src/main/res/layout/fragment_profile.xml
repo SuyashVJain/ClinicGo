@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="#F3F3F4" android:padding="20dp">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Profile" android:textSize="22sp" android:textStyle="bold"
+        android:textColor="#1A1C1C" android:layout_marginBottom="20dp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:gravity="center"
+        android:background="@drawable/bg_card" android:padding="24dp" android:layout_marginBottom="16dp">
+        <TextView android:layout_width="72dp" android:layout_height="72dp"
+            android:gravity="center" android:background="@drawable/bg_avatar"
+            android:textSize="24sp" android:textStyle="bold" android:textColor="#43647D"
+            android:text="DR" android:layout_marginBottom="12dp"/>
+        <TextView android:id="@+id/tv_name" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textSize="18sp"
+            android:textStyle="bold" android:textColor="#1A1C1C"/>
+        <TextView android:id="@+id/tv_email" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textSize="13sp"
+            android:textColor="#717783" android:layout_marginTop="4dp"/>
+        <TextView android:id="@+id/tv_role" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textSize="12sp"
+            android:textColor="#005DAC" android:textStyle="bold" android:layout_marginTop="8dp"/>
+    </LinearLayout>
+    <Button android:id="@+id/btn_logout" android:layout_width="match_parent"
+        android:layout_height="52dp" android:background="@drawable/bg_button_error"
+        android:text="Sign Out" android:textColor="#FFFFFF" android:textSize="15sp"
+        android:textStyle="bold"/>
+</LinearLayout>

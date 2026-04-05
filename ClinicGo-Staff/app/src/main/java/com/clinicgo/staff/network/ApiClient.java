@@ -1,4 +1,4 @@
-package com.clinicgo.patient.network;
+package com.clinicgo.staff.network;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,9 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     // IP Address of the backend server. Update this to match your development
     // environment.
-    private static final String BASE_URL = "http://192.168.29.2:5170/api/v1/";
-    // Use 10.0.2.2 for Android emulator to reach localhost on your PC
-    // Change to your PC's IP (e.g. 192.168.1.x) for physical device
+    // Change to your PC's IP when testing on physical device
+    // private static final String BASE_URL = "http://192.168.29.2:5170/api/v1/";
+    private static final String BASE_URL = "http://10.0.2.2:5170/api/v1/";
 
     private static Retrofit retrofit = null;
     private static Context appContext;
@@ -33,16 +33,12 @@ public class ApiClient {
                     .addInterceptor(chain -> {
                         Request original = chain.request();
                         SharedPreferences prefs = appContext.getSharedPreferences(
-                                "clinicgo_prefs", Context.MODE_PRIVATE);
+                                "clinicgo_staff_prefs", Context.MODE_PRIVATE);
                         String token = prefs.getString("jwt_token", null);
-
                         Request.Builder builder = original.newBuilder()
                                 .header("Content-Type", "application/json");
-
-                        if (token != null) {
+                        if (token != null)
                             builder.header("Authorization", "Bearer " + token);
-                        }
-
                         return chain.proceed(builder.build());
                     })
                     .build();

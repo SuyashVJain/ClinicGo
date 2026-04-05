@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:background="@drawable/bg_input"
+    android:padding="12dp" android:layout_marginBottom="10dp">
+    <EditText android:id="@+id/et_medicine_name" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:hint="Medicine name (e.g. Paracetamol)"
+        android:background="@android:color/transparent" android:textSize="14sp"
+        android:padding="6dp" android:layout_marginBottom="4dp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText android:id="@+id/et_dosage" android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1"
+            android:hint="Dosage (500mg)" android:background="@android:color/transparent"
+            android:textSize="13sp" android:padding="6dp" android:layout_marginEnd="4dp"/>
+        <EditText android:id="@+id/et_frequency" android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1"
+            android:hint="Frequency (Twice daily)" android:background="@android:color/transparent"
+            android:textSize="13sp" android:padding="6dp" android:layout_marginEnd="4dp"/>
+        <EditText android:id="@+id/et_duration" android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1"
+            android:hint="Duration (7 days)" android:background="@android:color/transparent"
+            android:textSize="13sp" android:padding="6dp"/>
+    </LinearLayout>
+</LinearLayout>

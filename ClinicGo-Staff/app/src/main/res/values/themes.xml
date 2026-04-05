@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ClinicGoStaff" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Theme.ClinicGoStaff" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#005DAC</item>
+        <item name="colorPrimaryVariant">#1976D2</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#40627B</item>
+        <item name="android:statusBarColor" tools:targetApi="l">#005DAC</item>
+        <item name="android:windowBackground">#F3F3F4</item>
     </style>
-
-    <style name="Theme.ClinicGoStaff" parent="Base.Theme.ClinicGoStaff" />
 </resources>
