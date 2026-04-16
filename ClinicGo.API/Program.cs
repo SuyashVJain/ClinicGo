@@ -53,14 +53,16 @@ builder.Services.AddScoped<AppointmentService>();
 builder.Services.AddSignalR();
 
 // ── CORS (React dashboard + Android apps) ────────────
-var ngrokUrl = builder.Configuration["NgrokUrl"] ?? "";
+var ngrokUrl  = builder.Configuration["NgrokUrl"]  ?? "";
+var vercelUrl = builder.Configuration["VercelUrl"] ?? "";
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ClinicGoPolicy", policy =>
     {
         var origins = new List<string> { "http://localhost:3000" };
-        if (!string.IsNullOrEmpty(ngrokUrl)) origins.Add(ngrokUrl);
+        if (!string.IsNullOrEmpty(ngrokUrl))  origins.Add(ngrokUrl);
+        if (!string.IsNullOrEmpty(vercelUrl)) origins.Add(vercelUrl);
         policy.WithOrigins(origins.ToArray())
               .AllowAnyHeader()
               .AllowAnyMethod()
