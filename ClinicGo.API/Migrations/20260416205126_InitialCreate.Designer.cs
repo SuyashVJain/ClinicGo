@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicGo.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260404174705_InitialCreate")]
+    [Migration("20260416205126_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

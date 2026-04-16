@@ -53,13 +53,19 @@ builder.Services.AddScoped<AppointmentService>();
 builder.Services.AddSignalR();
 
 // ── CORS (React dashboard + Android apps) ────────────
+var ngrokUrl = builder.Configuration["NgrokUrl"] ?? "";
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ClinicGoPolicy", policy =>
-        policy.WithOrigins("http://localhost:3000")
+    {
+        var origins = new List<string> { "http://localhost:3000" };
+        if (!string.IsNullOrEmpty(ngrokUrl)) origins.Add(ngrokUrl);
+        policy.WithOrigins(origins.ToArray())
               .AllowAnyHeader()
               .AllowAnyMethod()
-              .AllowCredentials());
+              .AllowCredentials();
+    });
 });
 
 // ── Controllers + Swagger ────────────────────────────
@@ -69,12 +75,12 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Name         = "Authorization",
-        Type         = SecuritySchemeType.Http,
-        Scheme       = "Bearer",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
         BearerFormat = "JWT",
-        In           = ParameterLocation.Header,
-        Description  = "Enter your JWT token here"
+        In = ParameterLocation.Header,
+        Description = "Enter your JWT token here"
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {

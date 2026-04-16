@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     // IP Address of the backend server. Update this to match your development
     // environment.
-    private static final String BASE_URL = "http://192.168.29.2:5170/api/v1/";
+    private static final String BASE_URL = "https://brantlee-vaned-cain.ngrok-free.dev/api/v1/";
     // Use 10.0.2.2 for Android emulator to reach localhost on your PC
     // Change to your PC's IP (e.g. 192.168.1.x) for physical device
 
@@ -41,6 +41,8 @@ public class ApiClient {
 
                         if (token != null) {
                             builder.header("Authorization", "Bearer " + token);
+                            builder.header("ngrok-skip-browser-warning", "true");
+
                         }
 
                         return chain.proceed(builder.build());
