@@ -7,11 +7,12 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using ClinicGo.API.Hubs;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // ── Database ──────────────────────────────────────────
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration
+    options.UseNpgsql(builder.Configuration
         .GetConnectionString("DefaultConnection")));
 
 // ── JWT Authentication ────────────────────────────────
@@ -118,6 +119,12 @@ app.MapHub<ChatHub>("/chathub");
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+try
+{
     await DbSeeder.SeedAsync(db);
 }
+catch (Exception ex)
+{
+    Console.WriteLine($"⚠️ Seeder skipped (DB unreachable): {ex.Message}");
+}}
 app.Run();

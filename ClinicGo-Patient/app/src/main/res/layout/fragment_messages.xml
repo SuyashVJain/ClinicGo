@@ -3,25 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F3F3F4"
-    android:gravity="center"
-    android:padding="40dp">
+    android:background="@color/white">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Messages"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#1A1C1C"
-        android:layout_marginBottom="12dp" />
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:title="Messages"
+        android:titleTextColor="#0D47A1"
+        style="@style/Widget.MaterialComponents.Toolbar" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chat with your doctor after a confirmed appointment"
-        android:textSize="14sp"
-        android:textColor="#717783"
-        android:gravity="center" />
+    <!-- Conversation list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvConversations"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
+
+    <!-- Empty state -->
+    <LinearLayout
+        android:id="@+id/llEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No conversations yet"
+            android:textSize="18sp"
+            android:textColor="#0D47A1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Once your appointment is confirmed, you can chat with your doctor here."
+            android:textSize="14sp"
+            android:textColor="#757575"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.4" />
+
+    </LinearLayout>
 
 </LinearLayout>

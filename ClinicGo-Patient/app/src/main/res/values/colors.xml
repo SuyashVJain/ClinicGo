@@ -15,4 +15,5 @@
 
     <color name="nav_active">#005DAC</color>
     <color name="nav_inactive">#717783</color>
+    <color name="white">#FFFFFF</color>
 </resources>

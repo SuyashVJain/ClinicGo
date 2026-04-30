@@ -1,70 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/bg_card"
-    android:padding="16dp"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tv_token"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:gravity="center"
-            android:background="@drawable/bg_token"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:textColor="#005DAC" />
-
+        <!-- Top row: token + doctor info + status chip -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="12dp">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
+            <!-- Token badge -->
+            <LinearLayout
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_token">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Token"
+                    android:textSize="9sp"
+                    android:textColor="#1565C0"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.05" />
+
+                <TextView
+                    android:id="@+id/tv_token"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#2"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#0D47A1" />
+
+            </LinearLayout>
+
+            <!-- Doctor + date + type -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="14dp">
+
+                <TextView
+                    android:id="@+id/tv_doctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr. Anil Mehta"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#1A1C1C" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2026-04-07 · 09:00"
+                    android:textSize="12sp"
+                    android:textColor="#717783"
+                    android:layout_marginTop="3dp" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Patient"
+                    android:textSize="11sp"
+                    android:textColor="#1976D2"
+                    android:layout_marginTop="3dp" />
+
+            </LinearLayout>
+
+            <!-- Status chip -->
             <TextView
-                android:id="@+id/tv_doctor"
+                android:id="@+id/tv_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dr. Anil Mehta"
-                android:textSize="15sp"
+                android:text="CONFIRMED"
+                android:textSize="10sp"
                 android:textStyle="bold"
-                android:textColor="#1A1C1C" />
+                android:textColor="#2E7D32"
+                android:background="@drawable/bg_chip_green"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp" />
 
-            <TextView
-                android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2026-04-07 · 09:00"
-                android:textSize="12sp"
-                android:textColor="#717783"
-                android:layout_marginTop="2dp" />
-
-            <TextView
-                android:id="@+id/tv_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="NEW"
-                android:textSize="11sp"
-                android:textColor="#40627B"
-                android:layout_marginTop="2dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CONFIRMED"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:textColor="#2E7D32" />
     </LinearLayout>
-</LinearLayout>
+
+</androidx.cardview.widget.CardView>

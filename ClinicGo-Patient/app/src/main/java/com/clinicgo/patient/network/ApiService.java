@@ -1,5 +1,6 @@
 package com.clinicgo.patient.network;
 
+import com.clinicgo.patient.models.ChatMessage;
 import com.clinicgo.patient.models.PaymentModel;
 import com.clinicgo.patient.models.AppointmentModel;
 import com.clinicgo.patient.models.AuthResponse;
@@ -35,9 +36,8 @@ public interface ApiService {
     // Appointments
     @GET("appointments/slots")
     Call<List<SlotModel>> getSlots(
-        @Query("doctorId") int doctorId,
-        @Query("date") String date
-    );
+            @Query("doctorId") int doctorId,
+            @Query("date") String date);
 
     @POST("appointments")
     Call<AppointmentModel> bookAppointment(@Body Map<String, Object> body);
@@ -69,4 +69,8 @@ public interface ApiService {
 
     @GET("reports/patient/{patientId}")
     Call<List<LabReportModel>> getLabReports(@Path("patientId") int patientId);
+
+    @GET("chat/history/{appointmentId}")
+    Call<List<ChatMessage>> getChatHistory(@Path("appointmentId") int appointmentId);
+
 }
