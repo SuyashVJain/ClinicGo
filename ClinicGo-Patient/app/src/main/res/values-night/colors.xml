@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark mode overrides for semantic colors -->
+    <color name="color_background">#121212</color>
+    <color name="color_surface">#1E1E1E</color>
+    <color name="color_text_primary">#FFFFFF</color>
+    <color name="color_text_secondary">#B0B0B0</color>
+
+    <!-- Hero header stays dark blue in both modes -->
+    <color name="hero_header">#0D47A1</color>
+
+    <!-- Primary blue stays the same -->
+    <color name="primary">#1976D2</color>
+    <color name="nav_active">#1976D2</color>
+    <color name="nav_inactive">#888888</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Status chips — slightly adjusted for dark backgrounds -->
+    <color name="status_confirmed_text">#81C784</color>
+    <color name="status_confirmed_bg">#1B3A1F</color>
+    <color name="status_completed_text">#64B5F6</color>
+    <color name="status_completed_bg">#0D2744</color>
+    <color name="status_cancelled_text">#EF9A9A</color>
+    <color name="status_cancelled_bg">#3E1010</color>
+    <color name="status_pending_text">#FFCC80</color>
+    <color name="status_pending_bg">#3E2200</color>
+</resources>

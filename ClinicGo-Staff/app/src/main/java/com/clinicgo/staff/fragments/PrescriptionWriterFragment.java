@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ScrollView;
 
 import androidx.fragment.app.Fragment;
 
@@ -29,7 +30,9 @@ public class PrescriptionWriterFragment extends Fragment {
 
     private EditText etAppointmentId, etDiagnosis, etFollowUp;
     private LinearLayout medicinesContainer;
-    private Button btnAddMedicine, btnSubmit;
+    private View btnAddMedicine;
+    private Button btnSubmit;
+    private TextView tvPatientHeader;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +45,21 @@ public class PrescriptionWriterFragment extends Fragment {
         medicinesContainer = view.findViewById(R.id.medicines_container);
         btnAddMedicine     = view.findViewById(R.id.btn_add_medicine);
         btnSubmit          = view.findViewById(R.id.btn_submit_prescription);
+        tvPatientHeader    = view.findViewById(R.id.tv_patient_header);
+
+        // Pre-fill appointment ID and patient name if launched from an appointment card
+        if (getArguments() != null) {
+            int prefilledId = getArguments().getInt("appointmentId", 0);
+            if (prefilledId > 0) {
+                etAppointmentId.setText(String.valueOf(prefilledId));
+                etAppointmentId.setEnabled(false);
+            }
+            String patientName = getArguments().getString("patientName", "");
+            if (tvPatientHeader != null && !patientName.isEmpty()) {
+                tvPatientHeader.setText("Writing for: " + patientName);
+                tvPatientHeader.setVisibility(View.VISIBLE);
+            }
+        }
 
         // Add first medicine row by default
         addMedicineRow();
@@ -105,13 +123,9 @@ public class PrescriptionWriterFragment extends Fragment {
                 btnSubmit.setText("Submit Prescription");
                 if (response.isSuccessful()) {
                     Toast.makeText(requireContext(),
-                        "Prescription submitted! Patient can now view it.", Toast.LENGTH_LONG).show();
-                    // Clear form
-                    etAppointmentId.setText("");
-                    etDiagnosis.setText("");
-                    etFollowUp.setText("");
-                    medicinesContainer.removeAllViews();
-                    addMedicineRow();
+                        "Prescription sent to patient! ✓", Toast.LENGTH_LONG).show();
+                    // Navigate back to where we came from
+                    requireActivity().getSupportFragmentManager().popBackStack();
                 } else {
                     Toast.makeText(requireContext(),
                         "Failed to submit. Check appointment ID.", Toast.LENGTH_SHORT).show();

@@ -99,10 +99,14 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static String formatTime(String isoTime) {
         if (isoTime == null || isoTime.length() < 16) return "";
         try {
-            // "2026-04-28T10:30:00" → "10:30"
-            return isoTime.substring(11, 16);
+            java.time.Instant instant = java.time.Instant.parse(
+                isoTime.endsWith("Z") ? isoTime : isoTime + "Z");
+            java.time.LocalTime local = instant
+                .atZone(java.time.ZoneId.systemDefault())
+                .toLocalTime();
+            return String.format("%02d:%02d", local.getHour(), local.getMinute());
         } catch (Exception e) {
-            return "";
+            return isoTime.length() >= 16 ? isoTime.substring(11, 16) : "";
         }
     }
 }

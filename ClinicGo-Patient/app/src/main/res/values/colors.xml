@@ -13,7 +13,24 @@
     <color name="status_cancelled">#BA1A1A</color>
     <color name="status_pending">#E65100</color>
 
-    <color name="nav_active">#005DAC</color>
+    <color name="nav_active">#1976D2</color>
     <color name="nav_inactive">#717783</color>
     <color name="white">#FFFFFF</color>
+
+    <!-- Semantic — used in layouts; overridden in values-night for dark mode -->
+    <color name="color_background">#F5F5F5</color>
+    <color name="color_surface">#FFFFFF</color>
+    <color name="color_text_primary">#212121</color>
+    <color name="color_text_secondary">#757575</color>
+    <color name="hero_header">#0D47A1</color>
+
+    <!-- Status chip colours -->
+    <color name="status_confirmed_text">#2E7D32</color>
+    <color name="status_confirmed_bg">#E8F5E9</color>
+    <color name="status_completed_text">#1565C0</color>
+    <color name="status_completed_bg">#E3F2FD</color>
+    <color name="status_cancelled_text">#C62828</color>
+    <color name="status_cancelled_bg">#FFEBEE</color>
+    <color name="status_pending_text">#E65100</color>
+    <color name="status_pending_bg">#FFF3E0</color>
 </resources>

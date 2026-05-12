@@ -7,6 +7,7 @@ import AdminDashboard      from './pages/admin/AdminDashboard';
 import AdminDoctors        from './pages/admin/AdminDoctors';
 import AdminAnalytics      from './pages/admin/AdminAnalytics';
 import AdminOperations     from './pages/admin/AdminOperations';
+import AdminPatients       from './pages/admin/AdminPatients';
 import DoctorSchedule      from './pages/doctor/DoctorSchedule';
 import DoctorStats         from './pages/doctor/DoctorStats';
 import DoctorLabReports    from './pages/doctor/DoctorLabReports';
@@ -46,6 +47,7 @@ export default function App() {
             <Route path="dashboard"  element={<AdminDashboard />} />
             <Route path="doctors"    element={<AdminDoctors />} />
             <Route path="analytics"  element={<AdminAnalytics />} />
+            <Route path="patients"   element={<AdminPatients />} />
             <Route path="operations" element={<AdminOperations />} />
           </Route>
 

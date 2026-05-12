@@ -1,5 +1,6 @@
 package com.clinicgo.patient.adapters;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,18 +50,26 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.ViewHolder> {
         holder.tvTime.setText(time);
 
         if (!slot.isAvailable) {
-            holder.itemView.setAlpha(0.4f);
+            holder.itemView.setAlpha(0.5f);
             holder.itemView.setEnabled(false);
             holder.tvTime.setBackgroundResource(R.drawable.bg_slot_unavailable);
+            holder.tvTime.setTextColor(0xFFBDBDBD);
+            holder.tvTime.setPaintFlags(
+                holder.tvTime.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         } else if (position == selectedPosition) {
             holder.itemView.setAlpha(1f);
+            holder.itemView.setEnabled(true);
             holder.tvTime.setBackgroundResource(R.drawable.bg_slot_selected);
             holder.tvTime.setTextColor(0xFFFFFFFF);
+            holder.tvTime.setPaintFlags(
+                holder.tvTime.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         } else {
             holder.itemView.setAlpha(1f);
             holder.itemView.setEnabled(true);
             holder.tvTime.setBackgroundResource(R.drawable.bg_slot_available);
-            holder.tvTime.setTextColor(0xFF005DAC);
+            holder.tvTime.setTextColor(0xFF1976D2);
+            holder.tvTime.setPaintFlags(
+                holder.tvTime.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
         holder.itemView.setOnClickListener(v -> {

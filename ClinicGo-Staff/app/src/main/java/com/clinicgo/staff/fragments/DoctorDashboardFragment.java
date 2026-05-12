@@ -16,7 +16,10 @@ import com.clinicgo.staff.models.QueueModel;
 import com.clinicgo.staff.network.ApiClient;
 import com.clinicgo.staff.utils.SessionManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,17 +34,24 @@ public class DoctorDashboardFragment extends Fragment {
         SessionManager session = new SessionManager(requireContext());
 
         TextView tvGreeting = view.findViewById(R.id.tv_greeting);
+        TextView tvDate     = view.findViewById(R.id.tv_date);
         TextView tvTotal    = view.findViewById(R.id.tv_total);
         TextView tvDone     = view.findViewById(R.id.tv_done);
         RecyclerView rv     = view.findViewById(R.id.rv_queue);
 
-        tvGreeting.setText("Good morning,\n" + session.getName());
+        tvGreeting.setText("Good morning, " + session.getName());
+        if (tvDate != null) {
+            String today = new SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault())
+                    .format(new Date());
+            tvDate.setText(today);
+        }
 
         AppointmentAdapter adapter = new AppointmentAdapter(new ArrayList<>(), requireContext(), true);
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
         rv.setAdapter(adapter);
 
-        ApiClient.getService().getTodayQueue(1).enqueue(new Callback<QueueModel>() {
+        int doctorId = session.getDoctorId();
+        ApiClient.getService().getTodayQueue(doctorId).enqueue(new Callback<QueueModel>() {
             @Override
             public void onResponse(Call<QueueModel> call, Response<QueueModel> response) {
                 if (response.isSuccessful() && response.body() != null) {

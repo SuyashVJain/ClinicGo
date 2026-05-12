@@ -1,10 +1,32 @@
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:5170/api/v1';
+// ── IST date utility ─────────────────────────────────────────────────
+// Always compute today's date in IST (UTC+5:30) regardless of the
+// browser's local timezone.  Use this wherever a YYYY-MM-DD string
+// representing "today" must be sent to the backend.
+export function todayIST() {
+  const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000; // 5h 30m in ms
+  const istDate = new Date(Date.now() + IST_OFFSET_MS);
+  return istDate.toISOString().split('T')[0]; // YYYY-MM-DD
+}
+
+// Formats any Date object as YYYY-MM-DD in IST
+export function toISTDateString(date) {
+  const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
+  const istDate = new Date(date.getTime() + IST_OFFSET_MS);
+  return istDate.toISOString().split('T')[0];
+}
+
+const API_BASE =
+  process.env.REACT_APP_API_URL ||
+  'https://brantlee-vaned-cain.ngrok-free.dev/api/v1';
 
 const api = axios.create({
   baseURL: API_BASE,
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    'Content-Type': 'application/json',
+    'ngrok-skip-browser-warning': 'true',
+  },
 });
 
 // Attach JWT token to every request
@@ -38,6 +60,7 @@ export const authAPI = {
 
 // ── Appointments ──────────────────────────────────────
 export const appointmentAPI = {
+  // date param must be YYYY-MM-DD in IST — use todayIST() when passing today
   getSlots:       (doctorId, date) => api.get(`/appointments/slots?doctorId=${doctorId}&date=${date}`),
   book:           (data)           => api.post('/appointments', data),
   confirm:        (id)             => api.put(`/appointments/${id}/confirm`),

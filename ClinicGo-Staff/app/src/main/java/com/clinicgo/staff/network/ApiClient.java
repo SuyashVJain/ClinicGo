@@ -14,7 +14,8 @@ public class ApiClient {
     // environment.
     // Change to your PC's IP when testing on physical device
     // private static final String BASE_URL = "http://192.168.29.2:5170/api/v1/";
-private static final String BASE_URL = "https://brantlee-vaned-cain.ngrok-free.dev/api/v1/";
+    private static final String BASE_URL = "https://brantlee-vaned-cain.ngrok-free.dev/api/v1/";
+    public static String getBaseUrl() { return BASE_URL; }
 
     private static Retrofit retrofit = null;
     private static Context appContext;

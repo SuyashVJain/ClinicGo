@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                             return;
                         }
                         new SessionManager(LoginActivity.this)
-                            .saveSession(auth.token, auth.userId, auth.name, email, auth.role);
+                            .saveSession(auth.token, auth.userId, auth.name, email, auth.role, auth.doctorId);
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         finish();
                     } else {

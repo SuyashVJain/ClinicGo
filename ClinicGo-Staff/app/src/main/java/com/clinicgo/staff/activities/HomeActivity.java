@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
 
 import com.clinicgo.staff.R;
+import com.clinicgo.staff.fragments.DoctorChatFragment;
 import com.clinicgo.staff.fragments.DoctorDashboardFragment;
+import com.clinicgo.staff.fragments.DoctorMessagesFragment;
 import com.clinicgo.staff.fragments.DoctorScheduleFragment;
 import com.clinicgo.staff.fragments.PrescriptionWriterFragment;
 import com.clinicgo.staff.fragments.ReceptionistDashboardFragment;
@@ -28,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
             finish();
             return;
         }
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         setContentView(R.layout.activity_home);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -41,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (id == R.id.nav_home)         return loadFragment(new DoctorDashboardFragment());
                 if (id == R.id.nav_schedule)     return loadFragment(new DoctorScheduleFragment());
                 if (id == R.id.nav_prescription) return loadFragment(new PrescriptionWriterFragment());
+                if (id == R.id.nav_messages)     return loadFragment(new DoctorMessagesFragment());
                 if (id == R.id.nav_profile)      return loadFragment(new ProfileFragment());
                 return false;
             });

@@ -3,10 +3,11 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const navItems = [
-  { to: '/admin/dashboard',  icon: 'dashboard',       label: 'Dashboard'   },
-  { to: '/admin/analytics',  icon: 'analytics',       label: 'Analytics'   },
-  { to: '/admin/doctors',    icon: 'medical_services', label: 'Doctors'    },
-  { to: '/admin/operations', icon: 'monitor_heart',   label: 'Operations'  },
+  { to: '/admin/dashboard',  icon: 'dashboard',        label: 'Dashboard'   },
+  { to: '/admin/analytics',  icon: 'analytics',        label: 'Analytics'   },
+  { to: '/admin/doctors',    icon: 'medical_services',  label: 'Doctors'    },
+  { to: '/admin/patients',   icon: 'group',             label: 'Patients'   },
+  { to: '/admin/operations', icon: 'monitor_heart',    label: 'Operations'  },
 ];
 
 export default function AdminLayout() {

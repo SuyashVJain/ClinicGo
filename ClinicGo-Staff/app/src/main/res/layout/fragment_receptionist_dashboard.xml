@@ -1,16 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical" android:background="#F3F3F4" android:padding="20dp">
-    <TextView android:id="@+id/tv_greeting" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="Good morning" android:textSize="24sp"
-        android:textStyle="bold" android:textColor="#005DAC" android:layout_marginTop="12dp"/>
-    <TextView android:id="@+id/tv_pending_count" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="" android:textSize="14sp"
-        android:textColor="#E65100" android:layout_marginTop="8dp" android:layout_marginBottom="16dp"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="Pending Approvals" android:textSize="16sp" android:textStyle="bold"
-        android:textColor="#1A1C1C" android:layout_marginBottom="12dp"/>
-    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv_pending"
-        android:layout_width="match_parent" android:layout_height="match_parent"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <!-- Hero header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#0D47A1"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="44dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CLINICGO STAFF"
+            android:textSize="10sp"
+            android:textColor="#90CAF9"
+            android:letterSpacing="0.15"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/tv_greeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Good morning, Receptionist"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="4dp" />
+
+        <!-- Pending count badge -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#1565C0"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:id="@+id/tv_pending_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 pending approval"
+                android:textSize="13sp"
+                android:textColor="#FFCC80"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Section header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="18dp"
+            android:background="#E65100"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pending Registrations"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#212121" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_pending"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false" />
+
 </LinearLayout>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { adminAPI, appointmentAPI } from '../../services/api';
 
-const STATUS_COLORS = {
-  CONFIRMED:            'bg-blue-100 text-blue-700',
-  PENDING_CONFIRMATION: 'bg-amber-100 text-amber-700',
-  COMPLETED:            'bg-green-100 text-green-700',
-  CANCELLED:            'bg-red-100 text-red-700',
-  NO_SHOW:              'bg-gray-100 text-gray-500',
+const STATUS_META = {
+  CONFIRMED:            { cls: 'bg-[#EFF6FF] text-[#1d4ed8]',  pulse: false, label: 'Confirmed' },
+  PENDING_CONFIRMATION: { cls: 'bg-[#FFF7ED] text-[#c2410c]',  pulse: true,  label: 'Pending'   },
+  COMPLETED:            { cls: 'bg-[#F0FDF4] text-[#166534]',  pulse: false, label: 'Completed' },
+  CANCELLED:            { cls: 'bg-[#FEF2F2] text-[#dc2626]',  pulse: false, label: 'Cancelled' },
+  NO_SHOW:              { cls: 'bg-[#F8FAFC] text-[#64748b]',  pulse: false, label: 'No Show'   },
 };
 
 export default function AdminOperations() {
@@ -32,14 +32,16 @@ export default function AdminOperations() {
   useEffect(() => { load(); const t = setInterval(load, 30000); return () => clearInterval(t); }, []);
 
   return (
-    <div className="h-full bg-surface-container-low">
-      <header className="sticky top-0 z-40 bg-surface/80 backdrop-blur-md flex justify-between items-center px-8 py-4 border-b border-outline-variant/10">
+    <div className="h-full bg-[#F8FAFC]">
+      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md flex justify-between items-center
+                         px-8 py-4 border-b border-[#E2E8F0]">
         <div>
-          <h2 className="text-xl font-bold text-on-surface">Live Operations</h2>
-          <p className="text-xs text-outline">Read-only · Auto-refreshes every 30s</p>
+          <h2 className="text-xl font-bold text-[#0F172A]">Live Operations</h2>
+          <p className="text-xs text-[#64748B]">Auto-refreshes every 30s</p>
         </div>
         <button onClick={load}
-          className="flex items-center gap-2 px-4 py-2 rounded-full border border-outline-variant text-sm font-semibold hover:bg-surface-container transition-colors">
+          className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#E2E8F0]
+                     text-sm font-semibold text-[#0F172A] hover:bg-[#F1F5F9] transition-colors">
           <span className="material-symbols-outlined text-sm">refresh</span>
           Refresh
         </button>
@@ -47,56 +49,95 @@ export default function AdminOperations() {
 
       <div className="px-8 py-8 max-w-[1400px] mx-auto">
         {loading ? (
-          <div className="text-center text-outline text-sm py-20">Loading operations data...</div>
-        ) : (
           <div className="space-y-6">
-            {doctors.map(doc => {
+            {[1,2].map(i => (
+              <div key={i} className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden">
+                <div className="flex items-center gap-4 px-6 py-4 border-b border-[#F1F5F9] bg-[#F8FAFC]">
+                  <div className="skeleton w-10 h-10 rounded-full" />
+                  <div className="space-y-2 flex-1">
+                    <div className="skeleton h-4 rounded w-1/4" />
+                    <div className="skeleton h-3 rounded w-1/6" />
+                  </div>
+                </div>
+                {[1,2,3].map(j => (
+                  <div key={j} className="flex items-center gap-4 px-6 py-3 border-b border-[#F8FAFC]">
+                    <div className="skeleton h-3 rounded w-8" />
+                    <div className="skeleton h-3 rounded flex-1" />
+                    <div className="skeleton h-5 rounded-full w-20" />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-6 page-enter">
+            {doctors.map((doc, di) => {
               const appts = queues[doc.doctorId] || [];
               const done  = appts.filter(a => a.status === 'COMPLETED').length;
               const total = appts.length;
+              const pct   = total > 0 ? Math.round((done / total) * 100) : 0;
               return (
-                <div key={doc.doctorId} className="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/10 overflow-hidden">
+                <div key={doc.doctorId}
+                     className={`bg-white rounded-2xl shadow-sm border border-[#E2E8F0] overflow-hidden
+                                 anim-fade-up anim-fade-up-${Math.min(di + 1, 6)}`}>
                   {/* Doctor header */}
-                  <div className="flex items-center justify-between px-6 py-4 border-b border-outline-variant/10 bg-surface-container-low">
+                  <div className="flex items-center justify-between px-6 py-4 border-b border-[#F1F5F9]
+                                  bg-[#F8FAFC]">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
-                        <span className="text-sm font-bold text-on-secondary-container">
-                          {doc.name?.split(' ').map(w => w[0]).join('').slice(0, 2)}
-                        </span>
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0
+                                      text-sm font-bold text-white"
+                           style={{ background: 'linear-gradient(135deg, #1565c0, #1e88e5)' }}>
+                        {doc.name?.split(' ').map(w => w[0]).join('').slice(0, 2)}
                       </div>
                       <div>
-                        <p className="text-sm font-bold text-on-background">{doc.name}</p>
-                        <p className="text-xs text-outline">{doc.specialization}</p>
+                        <p className="text-sm font-bold text-[#0F172A]">{doc.name}</p>
+                        <p className="text-xs text-[#64748B]">{doc.specialization}</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4 text-sm">
-                      <span className="text-outline">{done}/{total} completed</span>
-                      <div className="w-24 h-1.5 bg-surface-container rounded-full overflow-hidden">
-                        <div className="h-full bg-primary rounded-full"
-                             style={{ width: total > 0 ? `${(done/total)*100}%` : '0%' }} />
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <span className="text-sm font-bold text-[#0F172A]">{done}/{total}</span>
+                        <span className="text-xs text-[#64748B] ml-1">done</span>
                       </div>
-                      <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${doc.isAvailable ? 'bg-[#E8F5E9] text-[#2E7D32]' : 'bg-surface-container text-outline'}`}>
+                      <div className="w-28 h-2 bg-[#E2E8F0] rounded-full overflow-hidden">
+                        <div className="h-full bg-[#1976d2] rounded-full transition-all duration-700"
+                             style={{ width: `${pct}%` }} />
+                      </div>
+                      <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
+                        doc.isAvailable
+                          ? 'bg-[#DCFCE7] text-[#166534]'
+                          : 'bg-[#F1F5F9] text-[#64748B]'}`}>
                         {doc.isAvailable ? 'Available' : 'Unavailable'}
                       </span>
                     </div>
                   </div>
 
-                  {/* Appointment list */}
+                  {/* Appointment rows */}
                   {appts.length === 0 ? (
-                    <div className="px-6 py-8 text-center text-outline text-sm">No appointments today</div>
+                    <div className="px-6 py-8 text-center text-[#94a3b8] text-sm">
+                      No appointments today
+                    </div>
                   ) : (
-                    <div className="divide-y divide-outline-variant/10">
-                      {appts.map(a => (
-                        <div key={a.appointmentId} className="flex items-center gap-4 px-6 py-3">
-                          <span className="text-xs font-bold text-outline w-8">#{a.tokenNumber}</span>
-                          <span className="text-sm font-semibold text-on-background flex-1">{a.patientName}</span>
-                          <span className="text-xs text-outline">{a.slotTime?.slice(0,5)}</span>
-                          <span className="text-xs text-outline">{a.type}</span>
-                          <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${STATUS_COLORS[a.status] || 'bg-surface-container text-outline'}`}>
-                            {a.status?.replace('_', ' ')}
-                          </span>
-                        </div>
-                      ))}
+                    <div className="divide-y divide-[#F8FAFC]">
+                      {appts.map(a => {
+                        const meta = STATUS_META[a.status] || { cls: 'bg-[#F1F5F9] text-[#64748B]', pulse: false, label: a.status };
+                        return (
+                          <div key={a.appointmentId} className="flex items-center gap-4 px-6 py-3
+                                                                  hover:bg-[#F8FAFC] transition-colors">
+                            <span className="text-xs font-bold text-[#94a3b8] w-8">#{a.tokenNumber}</span>
+                            <span className="text-sm font-semibold text-[#0F172A] flex-1">{a.patientName}</span>
+                            <span className="text-xs text-[#64748B] w-12">{a.slotTime?.slice(0,5)}</span>
+                            <span className="text-xs text-[#94a3b8] w-20">{a.type}</span>
+                            <span className={`inline-flex items-center gap-1.5 text-xs font-bold
+                                             px-2.5 py-1 rounded-full ${meta.cls}`}>
+                              {meta.pulse && (
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#c2410c] pulse-dot shrink-0" />
+                              )}
+                              {meta.label}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>

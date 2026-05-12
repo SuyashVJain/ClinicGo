@@ -13,9 +13,14 @@ import com.clinicgo.staff.R;
 import com.clinicgo.staff.adapters.AppointmentAdapter;
 import com.clinicgo.staff.models.AppointmentModel;
 import com.clinicgo.staff.network.ApiClient;
+import com.clinicgo.staff.utils.SessionManager;
 
+import android.widget.TextView;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,12 +32,20 @@ public class DoctorScheduleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        TextView tvDate = view.findViewById(R.id.tv_schedule_date);
+        if (tvDate != null) {
+            tvDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault())
+                    .format(new Date()));
+        }
+
         RecyclerView rv = view.findViewById(R.id.rv_appointments);
         AppointmentAdapter adapter = new AppointmentAdapter(new ArrayList<>(), requireContext(), true);
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
         rv.setAdapter(adapter);
 
-        ApiClient.getService().getTodaySchedule(1).enqueue(new Callback<List<AppointmentModel>>() {
+        int doctorId = new SessionManager(requireContext()).getDoctorId();
+        ApiClient.getService().getTodaySchedule(doctorId).enqueue(new Callback<List<AppointmentModel>>() {
             @Override
             public void onResponse(Call<List<AppointmentModel>> call, Response<List<AppointmentModel>> response) {
                 if (response.isSuccessful() && response.body() != null)

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
 
 import com.clinicgo.patient.R;
@@ -29,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
 
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         setContentView(R.layout.activity_home);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);

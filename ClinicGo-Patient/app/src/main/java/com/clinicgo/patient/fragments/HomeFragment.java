@@ -16,8 +16,11 @@ import com.clinicgo.patient.models.AppointmentModel;
 import com.clinicgo.patient.network.ApiClient;
 import com.clinicgo.patient.utils.SessionManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +28,7 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
-    private TextView tvGreeting, tvStatus;
+    private TextView tvGreeting, tvStatus, tvDate;
     private RecyclerView rvUpcoming;
     private AppointmentAdapter adapter;
     private SessionManager session;
@@ -38,9 +41,14 @@ public class HomeFragment extends Fragment {
         session    = new SessionManager(requireContext());
         tvGreeting = view.findViewById(R.id.tv_greeting);
         tvStatus   = view.findViewById(R.id.tv_status);
+        tvDate     = view.findViewById(R.id.tv_date);
         rvUpcoming = view.findViewById(R.id.rv_upcoming);
 
         tvGreeting.setText("Good morning,\n" + session.getName());
+        if (tvDate != null) {
+            tvDate.setText(new SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault())
+                    .format(new Date()));
+        }
 
         String status = session.getStatus();
         if ("PENDING".equals(status)) {

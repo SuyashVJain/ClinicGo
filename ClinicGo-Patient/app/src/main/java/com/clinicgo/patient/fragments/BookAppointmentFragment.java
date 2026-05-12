@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -123,10 +124,19 @@ public class BookAppointmentFragment extends Fragment {
                     btnBook.setText("Confirm Booking");
 
                     if (response.isSuccessful() && response.body() != null) {
-                        Toast.makeText(requireContext(),
-                            "Appointment booked! Awaiting confirmation.",
-                            Toast.LENGTH_LONG).show();
-                        requireActivity().getSupportFragmentManager().popBackStack();
+                        AppointmentModel appt = response.body();
+                        // Navigate to payment screen
+                        PaymentFragment payFrag = new PaymentFragment();
+                        Bundle args = new Bundle();
+                        args.putInt("appointmentId", appt.appointmentId);
+                        args.putDouble("amount", 300.0); // Dr. Anil Mehta new patient fee
+                        args.putString("doctorName", "Dr. Anil Mehta");
+                        payFrag.setArguments(args);
+                        requireActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, payFrag)
+                            .addToBackStack(null)
+                            .commit();
                     } else {
                         Toast.makeText(requireContext(),
                             "Slot no longer available. Please choose another.",
@@ -148,7 +158,8 @@ public class BookAppointmentFragment extends Fragment {
     private void changeDate(int days) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-            Calendar cal = Calendar.getInstance();
+            sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata"));
             cal.setTime(sdf.parse(selectedDate));
             cal.add(Calendar.DAY_OF_MONTH, days);
             selectedDate = sdf.format(cal.getTime());
@@ -162,7 +173,10 @@ public class BookAppointmentFragment extends Fragment {
     }
 
     private String getTodayDate() {
+        // Always use IST explicitly so the correct date is sent to the backend
+        // even if the device clock is misconfigured or running in a different TZ.
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        return sdf.format(Calendar.getInstance().getTime());
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+        return sdf.format(Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata")).getTime());
     }
 }

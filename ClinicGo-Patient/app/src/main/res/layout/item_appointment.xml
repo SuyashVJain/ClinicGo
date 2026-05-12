@@ -5,102 +5,112 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    app:cardCornerRadius="16dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="2dp"
     app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal">
 
-        <!-- Top row: token + doctor info + status chip -->
+        <!-- Left status accent bar — color set programmatically by adapter -->
+        <View
+            android:id="@+id/view_status_bar"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="#1976D2" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:padding="14dp">
 
-            <!-- Token badge -->
             <LinearLayout
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="@drawable/bg_token">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Token"
-                    android:textSize="9sp"
-                    android:textColor="#1565C0"
-                    android:textAllCaps="true"
-                    android:letterSpacing="0.05" />
+                <!-- Token circle -->
+                <FrameLayout
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_avatar_circle">
 
-                <TextView
-                    android:id="@+id/tv_token"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_token"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF" />
+
+                </FrameLayout>
+
+                <!-- Doctor + date + type + status -->
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="#2"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#0D47A1" />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/tv_doctor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#212121" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="3dp">
+
+                        <TextView
+                            android:id="@+id/tv_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="#757575" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  ·  "
+                            android:textSize="12sp"
+                            android:textColor="#BDBDBD" />
+
+                        <TextView
+                            android:id="@+id/tv_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="#1976D2" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="6dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-            <!-- Doctor + date + type -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="14dp">
-
-                <TextView
-                    android:id="@+id/tv_doctor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dr. Anil Mehta"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="#1A1C1C" />
-
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2026-04-07 · 09:00"
-                    android:textSize="12sp"
-                    android:textColor="#717783"
-                    android:layout_marginTop="3dp" />
-
-                <TextView
-                    android:id="@+id/tv_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Patient"
-                    android:textSize="11sp"
-                    android:textColor="#1976D2"
-                    android:layout_marginTop="3dp" />
-
-            </LinearLayout>
-
-            <!-- Status chip -->
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CONFIRMED"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:textColor="#2E7D32"
-                android:background="@drawable/bg_chip_green"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp" />
 
         </LinearLayout>
 

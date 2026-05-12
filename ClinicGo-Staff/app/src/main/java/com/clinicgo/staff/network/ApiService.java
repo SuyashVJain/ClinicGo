@@ -2,6 +2,7 @@ package com.clinicgo.staff.network;
 
 import com.clinicgo.staff.models.AppointmentModel;
 import com.clinicgo.staff.models.AuthResponse;
+import com.clinicgo.staff.models.ChatMessage;
 import com.clinicgo.staff.models.LoginRequest;
 import com.clinicgo.staff.models.PatientModel;
 import com.clinicgo.staff.models.PrescriptionModel;
@@ -23,9 +24,16 @@ public interface ApiService {
     @POST("auth/login")
     Call<AuthResponse> login(@Body LoginRequest request);
 
-    // Doctor - schedule
+    // Doctor - appointments
+    @GET("appointments/doctor/{doctorId}")
+    Call<List<AppointmentModel>> getDoctorAppointments(@Path("doctorId") int doctorId);
+
     @GET("appointments/doctor/{doctorId}/today")
     Call<List<AppointmentModel>> getTodaySchedule(@Path("doctorId") int doctorId);
+
+    // Chat
+    @GET("chat/history/{appointmentId}")
+    Call<List<ChatMessage>> getChatHistory(@Path("appointmentId") int appointmentId);
 
     @PUT("appointments/{id}/complete")
     Call<Map<String, Object>> completeAppointment(@Path("id") int id);

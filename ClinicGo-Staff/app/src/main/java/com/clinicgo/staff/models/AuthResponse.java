@@ -5,4 +5,5 @@ public class AuthResponse {
     public String status;
     public int    userId;
     public String name;
+    public int    doctorId;  // populated for DOCTOR role; 0 otherwise
 }

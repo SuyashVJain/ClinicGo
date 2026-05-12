@@ -5,7 +5,11 @@
         android:orientation="vertical" android:padding="20dp">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:text="Write Prescription" android:textSize="22sp" android:textStyle="bold"
-            android:textColor="#1A1C1C" android:layout_marginBottom="20dp"/>
+            android:textColor="#1A1C1C" android:layout_marginBottom="8dp"/>
+        <TextView android:id="@+id/tv_patient_header"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="14sp" android:textColor="#1976D2" android:textStyle="bold"
+            android:visibility="gone" android:layout_marginBottom="16dp"/>
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
             android:orientation="vertical" android:background="@drawable/bg_card" android:padding="20dp">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -35,11 +39,15 @@
             <LinearLayout android:id="@+id/medicines_container"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical"/>
-            <Button android:id="@+id/btn_add_medicine" android:layout_width="wrap_content"
-                android:layout_height="40dp" android:background="@drawable/bg_icon_btn"
-                android:text="+ Add Medicine" android:textColor="#005DAC" android:textSize="13sp"
+            <TextView android:id="@+id/btn_add_medicine"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="+ Add Medicine"
+                android:textColor="#1976D2" android:textSize="13sp" android:textStyle="bold"
+                android:background="@drawable/bg_icon_btn"
+                android:paddingStart="16dp" android:paddingEnd="16dp"
+                android:paddingTop="10dp" android:paddingBottom="10dp"
                 android:layout_marginTop="8dp" android:layout_marginBottom="20dp"
-                android:paddingStart="16dp" android:paddingEnd="16dp"/>
+                android:clickable="true" android:focusable="true"/>
             <Button android:id="@+id/btn_submit_prescription" android:layout_width="match_parent"
                 android:layout_height="52dp" android:background="@drawable/bg_button_primary"
                 android:text="Submit Prescription" android:textColor="#FFFFFF"

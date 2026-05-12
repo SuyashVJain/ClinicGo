@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F4F8"
+    android:background="#F5F5F5"
     android:fillViewport="true">
 
     <LinearLayout
@@ -42,6 +42,14 @@
                 android:layout_marginTop="4dp" />
 
             <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#90CAF9"
+                android:layout_marginTop="4dp" />
+
+            <TextView
                 android:id="@+id/tv_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,11 +77,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/bg_button_primary"
-                android:text="Book an Appointment"
+                android:text="+ BOOK AN APPOINTMENT"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:letterSpacing="0.05" />
+                android:letterSpacing="0.08" />
 
         </LinearLayout>
 

@@ -17,7 +17,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const res = await authAPI.login({ email, password });
-      const { token, role, userId, name, status } = res.data;
+      const { token, role, userId, name, status, doctorId } = res.data;
 
       if (role !== 'ADMIN' && role !== 'DOCTOR') {
         setError('This portal is for Admin and Doctor access only.');
@@ -25,7 +25,7 @@ export default function LoginPage() {
         return;
       }
 
-      login({ userId, name, role, status }, token);
+      login({ userId, name, role, status, doctorId }, token);
       navigate(role === 'ADMIN' ? '/admin/dashboard' : '/doctor/schedule');
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid email or password.');
@@ -34,31 +34,88 @@ export default function LoginPage() {
     }
   };
 
+  const features = [
+    { icon: 'calendar_today',   text: 'Manage today\'s appointments in real-time' },
+    { icon: 'medical_services', text: 'Write prescriptions and track patient history' },
+    { icon: 'analytics',        text: 'Revenue analytics and performance metrics' },
+    { icon: 'group',            text: 'Patient registration and approval workflow' },
+  ];
+
   return (
-    <div className="min-h-screen bg-surface-container-low flex items-center justify-center px-4">
-      <div className="w-full max-w-sm">
+    <div className="min-h-screen flex">
+      {/* ── Left panel — dark navy branding ─────────────────────────────── */}
+      <div className="hidden lg:flex lg:w-[45%] flex-col justify-between p-12"
+           style={{ background: 'linear-gradient(160deg, #0D1B2A 0%, #1A2F45 100%)' }}>
 
         {/* Logo */}
-        <div className="flex items-center gap-3 mb-10 justify-center">
-          <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
-            <span className="material-symbols-outlined text-white text-2xl"
+        <div className="flex items-center gap-3 anim-fade-up anim-fade-up-1">
+          <div className="w-11 h-11 rounded-xl flex items-center justify-center"
+               style={{ background: 'linear-gradient(135deg, #1976d2, #42a5f5)' }}>
+            <span className="material-symbols-outlined text-white text-xl"
                   style={{ fontVariationSettings: "'FILL' 1" }}>
               medical_services
             </span>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-on-background tracking-tight">ClinicGo</h1>
-            <p className="text-xs text-outline">Admin & Doctor Portal</p>
+            <span className="text-white font-bold text-xl tracking-tight">ClinicGo</span>
+            <p className="text-xs" style={{ color: '#64748b' }}>Smart Clinic Management</p>
           </div>
         </div>
 
-        {/* Card */}
-        <div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm">
-          <h2 className="text-2xl font-bold text-on-background mb-1">Welcome back</h2>
-          <p className="text-sm text-outline mb-8">Sign in to your account</p>
+        {/* Tagline */}
+        <div className="anim-fade-up anim-fade-up-2">
+          <h2 className="text-4xl font-bold text-white leading-tight mb-4">
+            The smarter way<br />to run your clinic.
+          </h2>
+          <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7' }}>
+            From appointment queues to prescriptions and analytics — everything your
+            clinic needs in one place.
+          </p>
+
+          {/* Feature list */}
+          <div className="mt-10 space-y-4">
+            {features.map((f, i) => (
+              <div key={i} className={`flex items-center gap-3 anim-fade-up anim-fade-up-${i + 3}`}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                     style={{ background: 'rgba(25, 118, 210, 0.15)' }}>
+                  <span className="material-symbols-outlined text-sm"
+                        style={{ color: '#42a5f5', fontVariationSettings: "'FILL' 1" }}>
+                    {f.icon}
+                  </span>
+                </div>
+                <span style={{ color: '#cbd5e1', fontSize: '14px' }}>{f.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <p style={{ color: '#334155', fontSize: '12px' }}>
+          ClinicGo v1.0 · MedCare Clinic, Indore
+        </p>
+      </div>
+
+      {/* ── Right panel — login form ─────────────────────────────────────── */}
+      <div className="flex-1 flex items-center justify-center px-6 py-12 bg-white">
+        <div className="w-full max-w-md page-enter">
+
+          {/* Mobile logo (hidden on desktop) */}
+          <div className="flex items-center gap-2 mb-8 lg:hidden">
+            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
+              <span className="material-symbols-outlined text-white text-base"
+                    style={{ fontVariationSettings: "'FILL' 1" }}>
+                medical_services
+              </span>
+            </div>
+            <span className="font-bold text-lg text-on-background">ClinicGo</span>
+          </div>
+
+          <h2 className="text-3xl font-bold text-on-background mb-1">Welcome back</h2>
+          <p className="text-sm text-outline mb-8">Sign in to your admin or doctor account</p>
 
           {error && (
-            <div className="bg-error-container text-error text-sm rounded-xl px-4 py-3 mb-6">
+            <div className="flex items-center gap-2 bg-error-container text-error text-sm rounded-xl px-4 py-3 mb-6">
+              <span className="material-symbols-outlined text-base shrink-0">error</span>
               {error}
             </div>
           )}
@@ -95,23 +152,25 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-primary text-white py-3.5 rounded-xl font-semibold text-sm
-                         hover:bg-primary-container transition-colors disabled:opacity-60 mt-2"
+              className="w-full text-white py-3.5 rounded-xl font-semibold text-sm
+                         transition-all disabled:opacity-60 mt-2"
+              style={{
+                background: loading
+                  ? '#1976d2'
+                  : 'linear-gradient(135deg, #1565c0 0%, #1976d2 50%, #1e88e5 100%)',
+                boxShadow: loading ? 'none' : '0 4px 14px rgba(25,118,210,0.35)',
+              }}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Signing in...' : 'Sign In →'}
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-outline-variant/20">
+          <div className="mt-8 pt-6 border-t border-outline-variant/20">
             <p className="text-xs text-outline text-center">
-              Patient app available on Android
+              Patient booking available on the ClinicGo Android app
             </p>
           </div>
         </div>
-
-        <p className="text-center text-xs text-outline mt-6">
-          ClinicGo v1.0 · MedCare Clinic, Indore
-        </p>
       </div>
     </div>
   );

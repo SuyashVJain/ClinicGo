@@ -125,7 +125,9 @@ public class ChatFragment extends Fragment {
     private void connectSignalR() {
         String hubUrl = getHubUrl();
 
-        hubConnection = HubConnectionBuilder.create(hubUrl).build();
+        hubConnection = HubConnectionBuilder.create(hubUrl)
+                .withHeader("ngrok-skip-browser-warning", "true")
+                .build();
 
         // Receive message from doctor
         hubConnection.on("ReceiveMessage", (payload) -> {

@@ -21,4 +21,5 @@ public class AuthResponse
     public string Status { get; set; } = "";
     public int UserId { get; set; }
     public string Name { get; set; } = "";
+    public int DoctorId { get; set; }  // populated for DOCTOR role; 0 otherwise
 }

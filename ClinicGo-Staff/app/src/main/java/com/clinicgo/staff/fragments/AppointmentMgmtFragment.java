@@ -14,8 +14,11 @@ import com.clinicgo.staff.adapters.AppointmentAdapter;
 import com.clinicgo.staff.models.AppointmentModel;
 import com.clinicgo.staff.network.ApiClient;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,15 +36,19 @@ public class AppointmentMgmtFragment extends Fragment {
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
         rv.setAdapter(adapter);
 
-        ApiClient.getService().getTodaySchedule(1).enqueue(new Callback<List<AppointmentModel>>() {
-            @Override
-            public void onResponse(Call<List<AppointmentModel>> call,
-                                   Response<List<AppointmentModel>> response) {
-                if (response.isSuccessful() && response.body() != null)
-                    adapter.updateData(response.body());
-            }
-            @Override public void onFailure(Call<List<AppointmentModel>> call, Throwable t) {}
-        });
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                .format(Calendar.getInstance().getTime());
+
+        ApiClient.getService().getAllAppointments(today, null)
+                .enqueue(new Callback<List<AppointmentModel>>() {
+                    @Override
+                    public void onResponse(Call<List<AppointmentModel>> call,
+                                           Response<List<AppointmentModel>> response) {
+                        if (response.isSuccessful() && response.body() != null)
+                            adapter.updateData(response.body());
+                    }
+                    @Override public void onFailure(Call<List<AppointmentModel>> call, Throwable t) {}
+                });
 
         return view;
     }

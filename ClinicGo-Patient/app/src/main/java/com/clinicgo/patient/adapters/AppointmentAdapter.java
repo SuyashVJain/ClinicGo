@@ -43,8 +43,8 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.tvDate.setText(appt.appointmentDate + " · " +
                 (appt.slotTime != null ? appt.slotTime.substring(0, 5) : ""));
 
-        // Token — show just the number bold
-        holder.tvToken.setText("#" + appt.tokenNumber);
+        // Token — circle with just number
+        holder.tvToken.setText(String.valueOf(appt.tokenNumber));
 
         // Type — human readable
         holder.tvType.setText(formatType(appt.type));
@@ -53,6 +53,11 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         String statusLabel = formatStatus(appt.status);
         holder.tvStatus.setText(statusLabel);
         applyStatusChip(holder.tvStatus, appt.status);
+
+        // Left accent bar
+        if (holder.viewStatusBar != null) {
+            holder.viewStatusBar.setBackgroundColor(statusBarColor(appt.status));
+        }
     }
 
     @Override
@@ -110,7 +115,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
         tv.setTextColor(textColor);
 
-        // Apply rounded chip background programmatically
         GradientDrawable chip = new GradientDrawable();
         chip.setShape(GradientDrawable.RECTANGLE);
         chip.setCornerRadius(40f);
@@ -118,18 +122,30 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         tv.setBackground(chip);
     }
 
+    private static int statusBarColor(String status) {
+        switch (status != null ? status : "") {
+            case "CONFIRMED":            return 0xFF2E7D32;
+            case "COMPLETED":            return 0xFF1565C0;
+            case "CANCELLED":            return 0xFFC62828;
+            case "NO_SHOW":              return 0xFF6D4C41;
+            default:                     return 0xFFE65100;
+        }
+    }
+
     // ── ViewHolder ────────────────────────────────────────────────────────────
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvDoctor, tvDate, tvToken, tvStatus, tvType;
+        View     viewStatusBar;
 
         ViewHolder(View itemView) {
             super(itemView);
-            tvDoctor = itemView.findViewById(R.id.tv_doctor);
-            tvDate   = itemView.findViewById(R.id.tv_date);
-            tvToken  = itemView.findViewById(R.id.tv_token);
-            tvStatus = itemView.findViewById(R.id.tv_status);
-            tvType   = itemView.findViewById(R.id.tv_type);
+            tvDoctor      = itemView.findViewById(R.id.tv_doctor);
+            tvDate        = itemView.findViewById(R.id.tv_date);
+            tvToken       = itemView.findViewById(R.id.tv_token);
+            tvStatus      = itemView.findViewById(R.id.tv_status);
+            tvType        = itemView.findViewById(R.id.tv_type);
+            viewStatusBar = itemView.findViewById(R.id.view_status_bar);
         }
     }
 }

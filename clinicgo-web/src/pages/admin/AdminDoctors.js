@@ -96,62 +96,87 @@ export default function AdminDoctors() {
           </div>
         )}
 
-        {/* Table */}
-        <div className="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/10 overflow-hidden">
-          {loading ? (
-            <div className="p-12 text-center text-outline text-sm">Loading doctors...</div>
-          ) : doctors.length === 0 ? (
-            <div className="p-12 text-center text-outline text-sm">No doctors yet - add one above</div>
-          ) : (
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-outline-variant/10">
-                  {['Doctor', 'Specialization', 'New Patient Fee', 'Follow-up Fee', 'Status', 'Actions'].map(h => (
-                    <th key={h} className="text-left text-xs font-bold text-outline uppercase tracking-wider px-6 py-4">{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-outline-variant/10">
-                {doctors.map(d => (
-                  <tr key={d.doctorId} className="hover:bg-surface-container-low transition-colors">
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
-                          <span className="text-xs font-bold text-on-secondary-container">
-                            {d.name?.split(' ').map(w => w[0]).join('').slice(0, 2)}
-                          </span>
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-on-background">{d.name}</p>
-                          <p className="text-xs text-outline">{d.email}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-on-surface-variant">{d.specialization}</td>
-                    <td className="px-6 py-4 text-sm font-semibold text-on-background">₹{d.newPatientFee}</td>
-                    <td className="px-6 py-4 text-sm font-semibold text-on-background">₹{d.followUpFee}</td>
-                    <td className="px-6 py-4">
-                      <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                        d.status === 'ACTIVE'
-                          ? 'bg-[#E8F5E9] text-[#2E7D32]'
-                          : 'bg-surface-container text-outline'}`}>
-                        {d.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      {d.status === 'ACTIVE' && (
-                        <button onClick={() => handleDeactivate(d.doctorId)}
-                          className="text-xs text-error hover:bg-error-container px-3 py-1.5 rounded-lg transition-colors">
-                          Deactivate
-                        </button>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
+        {/* Doctor cards grid */}
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+            {[1,2,3].map(i => (
+              <div key={i} className="bg-white rounded-2xl p-6 border border-[#E2E8F0] space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="skeleton w-12 h-12 rounded-full shrink-0" />
+                  <div className="space-y-2 flex-1">
+                    <div className="skeleton h-4 rounded w-3/4" />
+                    <div className="skeleton h-3 rounded w-1/2" />
+                  </div>
+                </div>
+                <div className="skeleton h-3 rounded w-full" />
+                <div className="skeleton h-3 rounded w-2/3" />
+              </div>
+            ))}
+          </div>
+        ) : doctors.length === 0 ? (
+          <div className="bg-white rounded-2xl p-16 text-center border border-[#E2E8F0]">
+            <span className="material-symbols-outlined text-4xl text-[#CBD5E1] mb-3 block">stethoscope</span>
+            <p className="text-[#64748B] text-sm">No doctors yet — add one above</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+            {doctors.map((d, i) => (
+              <div key={d.doctorId}
+                   className={`card-hover bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-sm
+                               anim-fade-up anim-fade-up-${Math.min(i + 1, 6)}`}>
+                {/* Doctor header */}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-sm font-bold"
+                         style={{ background: 'linear-gradient(135deg, #1565c0, #1e88e5)', color: '#fff' }}>
+                      {d.name?.split(' ').map(w => w[0]).join('').slice(0, 2)}
+                    </div>
+                    <div>
+                      <p className="font-bold text-[#0F172A] text-sm leading-tight">{d.name}</p>
+                      <p className="text-xs text-[#64748B] mt-0.5">{d.email}</p>
+                    </div>
+                  </div>
+                  <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full shrink-0 ${
+                    d.status === 'ACTIVE'
+                      ? 'bg-[#DCFCE7] text-[#166534]'
+                      : 'bg-[#F1F5F9] text-[#64748B]'}`}>
+                    {d.status}
+                  </span>
+                </div>
+
+                {/* Specialization */}
+                <div className="flex items-center gap-1.5 mb-4">
+                  <span className="material-symbols-outlined text-xs text-[#1976d2]"
+                        style={{ fontVariationSettings: "'FILL' 1" }}>
+                    medical_services
+                  </span>
+                  <span className="text-sm text-[#475569]">{d.specialization}</span>
+                </div>
+
+                {/* Fee badges */}
+                <div className="flex gap-2 mb-5">
+                  <div className="flex-1 bg-[#EFF6FF] rounded-xl p-3 text-center">
+                    <p className="text-[10px] text-[#64748B] mb-0.5">New Patient</p>
+                    <p className="text-sm font-bold text-[#1976d2]">₹{d.newPatientFee}</p>
+                  </div>
+                  <div className="flex-1 bg-[#F0FDF4] rounded-xl p-3 text-center">
+                    <p className="text-[10px] text-[#64748B] mb-0.5">Follow-up</p>
+                    <p className="text-sm font-bold text-[#059669]">₹{d.followUpFee}</p>
+                  </div>
+                </div>
+
+                {/* Action */}
+                {d.status === 'ACTIVE' && (
+                  <button onClick={() => handleDeactivate(d.doctorId)}
+                    className="w-full text-xs font-semibold text-[#dc2626] hover:bg-[#FEF2F2]
+                               py-2 rounded-lg transition-colors border border-[#FCA5A5]">
+                    Deactivate
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
