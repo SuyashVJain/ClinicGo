@@ -18,7 +18,7 @@ export function toISTDateString(date) {
 }
 
 const API_BASE =
-  process.env.REACT_APP_API_URL ||
+  process.env.REACT_APP_API_BASE ||
   'https://brantlee-vaned-cain.ngrok-free.dev/api/v1';
 
 const api = axios.create({
