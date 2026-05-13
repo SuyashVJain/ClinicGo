@@ -18,7 +18,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvConversations"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:clipToPadding="false"
         android:paddingTop="8dp"
         android:paddingBottom="8dp" />
@@ -26,7 +27,8 @@
     <LinearLayout
         android:id="@+id/llEmptyState"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone"
