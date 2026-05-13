@@ -335,5 +335,3 @@ The backend is deployed on Linux servers (UTC). All "today" date comparisons in 
 ## License
 
 Academic project — not for commercial use.
-
-Built with ❤️ at **Symbiosis University of Applied Sciences, Indore** · 2025
